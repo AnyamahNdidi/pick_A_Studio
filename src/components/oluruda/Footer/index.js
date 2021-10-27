@@ -6,7 +6,8 @@ import React from "react";
 //   FaLinkedin,
 //   FaInstagram,
 // } from "react-icons/fa";
-
+import Logo from "../Image/logo-2.png";
+import styled from "styled-components";
 import {
   FaFacebook,
   FaYoutube,
@@ -42,7 +43,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterWrap>
-        <FooterLinksContainer>
+        {/* <FooterLinksContainer>
           <FooterLinksWrapper>
             <FooterLinksItems>
               <FooterLinkTitle> About Us </FooterLinkTitle>
@@ -80,12 +81,12 @@ const Footer = () => {
               <FooterLink to="/signin">Terms of Service</FooterLink>
             </FooterLinksItems>
           </FooterLinksWrapper>
-        </FooterLinksContainer>
+        </FooterLinksContainer> */}
 
         <SocialMedia>
           <SocialMediaWrap>
             <SocialMediaLogo onClick={toggleHome}>
-              AJEGUNLE DEV DATA CENTER
+              <LogoPix src={Logo} alt="" />
             </SocialMediaLogo>
             <WebsiteRight
               href="www.brighterdayscodelab.com.ng"
@@ -131,3 +132,7 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const LogoPix = styled.img`
+  width: 200px;
+`;

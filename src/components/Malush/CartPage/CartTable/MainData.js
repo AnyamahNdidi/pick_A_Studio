@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import img from "./img/2.jpg"
 import { DeleteOutlined } from '@ant-design/icons';
 import { SideBarData } from "./DataFile"
-import { removeFromBook } from "../../../ReduxState/actionState"
-import { connect } from "react-redux"
+// import { removeFromBook } from "../../../ReduxState/actionState"
+import { connect, useDispatch } from "react-redux"
+import { removeFromBookings } from "../../../ReduxState/actions"
 
 
-function MainData({ r, remove }) {
+function MainData({ r }) {
+  const dispatch = useDispatch()
   return (
     <AllContainer>
       <Container>
@@ -48,7 +50,7 @@ function MainData({ r, remove }) {
           </Con7>
           <Con8
             onClick={() => {
-              remove(r.id)
+              dispatch(removeFromBookings(r))
             }}
           >
             <DeleteOutlined style={{
@@ -67,15 +69,15 @@ function MainData({ r, remove }) {
     </AllContainer>
   )
 }
-const mapDis = (dispatch) => {
-  return {
-    remove: (id) => {
-      dispatch(removeFromBook(id))
-    }
-  }
-}
+// const mapDis = (dispatch) => {
+//   return {
+//     remove: (id) => {
+//       dispatch(removeFromBook(id))
+//     }
+//   }
+// }
 
-export default connect(null, mapDis)(MainData)
+export default MainData;
 
 const Type2 = styled.div`
       height: 80px;

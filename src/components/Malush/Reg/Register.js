@@ -44,6 +44,8 @@ function Register() {
   const [gender, setgender] = useState("")
   const [password, setpassword] = useState("")
   const [conpassword, setconpassword] = useState("")
+  const [emailError, setEmailError] = React.useState("");
+  const [passwordError, setPasswordError] = React.useState("");
   const hist = useHistory();
 
   const HandlePass = () => {
@@ -54,36 +56,66 @@ function Register() {
   }
 
   const signInUser = async () => {
-    await app.auth().signInWithEmailAndPassword(email, password)
-    hist.push("/load")
+    const user = await app.auth().signInWithEmailAndPassword(email, password)
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/invalid-email":
+          case "auth/user-disabled":
+          case "auth/user-not-found":
+            setEmailError(err.message);
+            break;
+          case "auth/wrong-password":
+            setPasswordError(err.message);
+            break;
+        }
+      });
+
+    if (user) {
+      hist.push("/load")
+    }
+
   }
 
   const SignUpUser = async () => {
     const newUsers = await app.auth().createUserWithEmailAndPassword(email, password)
+      .catch((err) => {
+        switch (err.code) {
+          case "auth/email-already-in-use":
+          case "auth/invalid-email":
+            setEmailError(err.message);
+            break;
+          case "auth/weak-password":
+            setPasswordError(err.message);
+            break;
+        }
+      });
 
-    useDate.doc(newUsers.uid).set({
-      firstname,
-      middleName,
-      surname,
-      phone,
-      email,
-      DateofBirth,
-      gender,
-      password,
-      conpassword
+    if (newUsers) {
+      useDate.doc(newUsers.uid).set({
+        firstname,
+        middleName,
+        surname,
+        phone,
+        email,
+        DateofBirth,
+        gender,
+        password,
+        conpassword
 
-    })
-    setFirstname("")
-    setMiddleName("")
-    setSurname("")
-    setPhone("")
-    setEmail("")
-    setDateofBirth("")
-    setgender("")
-    setpassword("")
-    setconpassword("")
-    hist.push("/load")
+      });
 
+      setFirstname("")
+      setMiddleName("")
+      setSurname("")
+      setPhone("")
+      setEmail("")
+      setDateofBirth("")
+      setgender("")
+      setpassword("")
+      setconpassword("")
+      hist.push("/load")
+
+    }
   }
 
 
@@ -128,6 +160,8 @@ function Register() {
                       }}
 
                     />
+                    <p style={{ color: "red", fontSize: "11px" }}> {emailError} </p>
+
                     <label>Password</label>
                     <ConPass>
                       <Input
@@ -157,6 +191,9 @@ function Register() {
                         }
                       </EyeHolder>
                     </ConPass>
+                    <p style={{ color: "red", fontSize: "11px" }}>
+                      {passwordError}{" "}
+                    </p>
                   </InputC>
 
                 </InputCon>
@@ -295,6 +332,9 @@ function Register() {
                           }
                         }
                       />
+                      <p style={{ color: "red", fontSize: "11px" }}>
+                        {emailError}{" "}
+                      </p>
 
 
                       <label>Date Of Birth</label>
@@ -364,6 +404,9 @@ function Register() {
                           }
                         </EyeHolder>
                       </ConPass>
+                      <p style={{ color: "red", fontSize: "11px" }}>
+                        {passwordError}{" "}
+                      </p>
 
                     </InputC2>
 

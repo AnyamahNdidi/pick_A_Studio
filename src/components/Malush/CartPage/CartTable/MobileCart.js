@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import img from "./img/2.jpg"
-import { removeFromBook } from "../../../ReduxState/actionState"
-import { connect } from "react-redux"
+// import { removeFromBook } from "../../../ReduxState/actionState"
+import { connect, useDispatch } from "react-redux"
+import { removeFromBookings } from "../../../ReduxState/actions"
 
-function MobileCart({ r, remove }) {
+function MobileCart({ r }) {
+  const dispatch = useDispatch()
   return (
     <AllContainer>
       <Container>
@@ -22,13 +24,13 @@ function MobileCart({ r, remove }) {
                 Type:&nbsp;{r.type}
               </Typee>
               <ConTypeTo>
-                <From>
+                {/* <From>
                   From
                 </From>
-                <TP>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</TP>
-                <To>
-                  To
-                </To>
+                <TP>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</TP> */}
+              
+                  Selected date
+             
 
               </ConTypeTo>
               <ConDate>
@@ -43,7 +45,7 @@ function MobileCart({ r, remove }) {
 
               <ConAmt>
                 <span> Amount:</span>
-                &nbsp; ₦{r.price}
+                &nbsp;{r.price}
               </ConAmt>
 
             </ConCon>
@@ -53,7 +55,7 @@ function MobileCart({ r, remove }) {
           <ConRemove
             onClick={
               () => {
-                remove(r.id)
+                dispatch(removeFromBookings(r))
               }
             }
           >
@@ -71,20 +73,21 @@ function MobileCart({ r, remove }) {
   )
 }
 
-const MapDis = (dispatch) => {
-  return {
-    remove: (id) => {
-      dispatch(removeFromBook(id))
-    }
-  }
-}
+// const MapDis = (dispatch) => {
+//   return {
+//     remove: (id) => {
+//       dispatch(removeFromBook(id))
+//     }
+//   }
+// }
 
-export default connect(null, MapDis)(MobileCart)
+export default MobileCart;
 
 const TP = styled.div`
 color: black;
 font-weight: bold;
 color: red;
+
 `
 const To = styled.div`
 color: black;
