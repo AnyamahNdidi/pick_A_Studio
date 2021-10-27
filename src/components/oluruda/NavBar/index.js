@@ -18,7 +18,9 @@ import {
   OtherCon2,
   DropLinks,
   DashLink,
-  SameLoDa
+  SameLoDa,
+  MobLinks,
+  CartMobile
 
 } from "./NavBar.element";
 import {
@@ -47,6 +49,8 @@ import { DownOutlined } from '@ant-design/icons';
 import { app } from "../../../base";
 import { useHistory } from "react-router-dom"
 import "./Allstyle.css"
+import { useSelector, useDispatch } from "react-redux"
+import { totalValue } from "../../ReduxState/actions"
 
 
 const { SubMenu } = Menu;
@@ -60,6 +64,16 @@ const NavBar = ({ toggle }) => {
   const [cssChange, setcssChange] = useState(true)
   const [show, setShow] = useState(true);
   const hist = useHistory()
+
+  const dispatch = useDispatch();
+
+  const dfile = useSelector((state) =>
+    state.persistedReducer.cartbookings
+  )
+
+  useEffect(() => {
+    dispatch(totalValue())
+  }, [dfile])
   const diSignOut = () => {
     setShow((prev) => !prev)
   };
@@ -115,10 +129,18 @@ const NavBar = ({ toggle }) => {
           </SameLoDa>
 
 
-
-
+          <CartMobile to="/explorlisting">
+          <ShoppingBasketIcon  />
+          <span>{dfile.length}</span>
+          </CartMobile>
+             
           <MobileIcons onClick={toggle}>
-            <FaBars />
+            
+            <FaBars 
+            style={{
+              fontSize: "28px"
+            }}
+            />
           </MobileIcons>
           <NavMenu>
             <NavItem>
@@ -136,6 +158,7 @@ const NavBar = ({ toggle }) => {
               <NavLinks to="/cartpage">
                 {" "}
                 <ShoppingBasketIcon />{" "}
+                <span>{dfile.length}</span>
               </NavLinks>
             </NavItem>
 

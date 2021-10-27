@@ -1,29 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
 import MobileCart from './MobileCart'
-import { connect } from "react-redux"
+import { connect, useDispatch, useSelector } from "react-redux"
+import MainData from './MainData';
 
-function MobileAccept({ view }) {
+function MobileAccept() {
+  const data = useSelector((state) => state.persistedReducer.cartbookings);
+  const dispatch = useDispatch()
   return (
     <Container>
       <Wrapper>
         {
-          view.map((item) => (
-            <MobileCart r={item} key={item.id} />
+          data?.map((props) => (
+            <MobileCart r={props} key={props.id} />
           ))
         }
+
+
+
 
       </Wrapper>
     </Container>
   )
 }
-const Mapbooklist = (state) => {
-  return {
-    view: state.shop.books
-  }
-}
 
-export default connect(Mapbooklist)(MobileAccept)
+export default MobileAccept
 
 const Container = styled.div``
 

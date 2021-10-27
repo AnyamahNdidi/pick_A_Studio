@@ -2,14 +2,28 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import pic from "./img/1.jpeg";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { connect, useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { app } from "../../base"
-import { addbook, viewsinglebook } from "../ReduxState/actionState"
+import { allstudio, viewDetails } from "../../components/ReduxState/actions"
 import { Link } from "react-router-dom"
 const db = app.firestore().collection("studio")
-const ExplorListing = ({ products, single }) => {
-  const [data, setData] = useState([])
+const ExplorListing = () => {
+  const dfile = useSelector((state) => state.persistedReducer.allbookings)
   const dispatch = useDispatch()
+
+  // const getData = async () => {
+  //   const res = await db.onSnapshot((snap) => {
+  //     const i = []
+  //     snap.forEach((doc) => {
+  //       i.push({ ...doc.data(), id: doc.id })
+  //     });
+  //     if (res) {
+  //       dispatch(addbook(i))
+  //     }
+  //     setData(i)
+  //   })
+
+  // }
 
   const getData = async () => {
     const res = await db.onSnapshot((snap) => {
@@ -17,22 +31,25 @@ const ExplorListing = ({ products, single }) => {
       snap.forEach((doc) => {
         i.push({ ...doc.data(), id: doc.id })
       });
+      console.log(i)
       if (res) {
-        dispatch(addbook(i))
+        dispatch(allstudio(i))
       }
-      setData(i)
     })
+
 
   }
 
+
+
   useEffect(() => {
     getData()
-    console.log(data)
+
   }, [])
   return (
     <Container>
       {
-        data.map((item) => (
+        dfile.map((item) => (
           <ExploreCard>
             <ExploreImg src={item.pic} />
             <ExploreTitle>{item.title}</ExploreTitle>
@@ -41,7 +58,7 @@ const ExplorListing = ({ products, single }) => {
             </ExploreType>
             <ExploreLocation>
               {" "}
-              <span style={{ color: "gray", fontSize: "14px" }}>Location</span> : {item.location}
+              <span style={{ color: "gray", fontSize: "14px" }}>Location</span> :{item.location}
 
             </ExploreLocation>
             <ExplorePrice>
@@ -56,11 +73,14 @@ const ExplorListing = ({ products, single }) => {
             </ExploreDescription>
             <ExploreDetails
               onClick={() => {
-                single(item)
-                console.log("this is rhe item", item)
+                dispatch(viewDetails(item))
+                // single(item)
+                // console.log("this is rhe item", item)
               }}
-              to={`/details/${item.id}`
-              }>
+
+              to={`/details/${item.id}`}
+
+            >
               <ShoppingCartIcon style={{ color: "white" }} />
               <DetailText
 
@@ -72,28 +92,27 @@ const ExplorListing = ({ products, single }) => {
 
 
 
-
     </Container >
   );
 };
 
-const mapDispatchToprops = (dispatch) => {
-  return {
-    single: (id) => {
-      dispatch(viewsinglebook(id))
-    }
-  }
-}
+// const mapDispatchToprops = (dispatch) => {
+//   return {
+//     single: (id) => {
+//       dispatch(viewsinglebook(id))
+//     }
+//   }
+// }
 
 
 
-export const mapbookings = state => {
-  return {
-    products: state.shop.products
-  }
-}
+// export const mapbookings = state => {
+//   return {
+//     products: state.shop.products
+//   }
+// }
 
-export default connect(mapbookings, mapDispatchToprops)(ExplorListing);
+export default ExplorListing;
 
 const DetailText = styled.div`
   color: white;

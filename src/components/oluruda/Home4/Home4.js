@@ -49,6 +49,13 @@ const Button = styled.div`
   color: #fff;
   border-radius: 5px;
   background-color: #4a87ed;
+  transition: all 350ms;
+  transform: scale(1);
+
+  :hover {
+    transform: scale(0.96);
+    cursor: pointer;
+  }
 `;
 const SubText = styled.div`
   font-size: x-small;

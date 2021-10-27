@@ -8,19 +8,24 @@ import SideBar from "./SideBar/SideBar";
 import styled from "styled-components";
 
 function Home() {
-
+  
   return (
     <div>
-      <Container>
-        <HeroSection />
-        <ModalButton />
+     <Container>
+      <HeroSection />
+      <ModalButton />
       </Container>
-
+     
     </div>
   );
 }
 
 export default Home;
+
 const Container = styled.div`
 background-color: #191a1c;
+height: 100%;
+  min-height: 100vh;
 `
+
+

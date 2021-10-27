@@ -4,12 +4,14 @@ import pic from "./img/1.jpeg";
 import pic1 from "./img/2.jpeg";
 import pic2 from "./img/3.jpeg";
 import { connect } from "react-redux"
-import { addToBook } from "../ReduxState/actionState"
+import { allstudio, addTobook } from "../../components/ReduxState/actions"
+import { useSelector, useDispatch } from "react-redux"
+// import { addToBook } from "../ReduxState/actionState"
 
 import "./ExplorStyle.css";
 import { DateRangePickerComponent } from "@syncfusion/ej2-react-calendars";
 
-const EploreDetails = ({ view, add }) => {
+const EploreDetails = () => {
   const startValue: Date = new Date(
     new Date().getFullYear(),
     new Date().getMonth(),
@@ -20,33 +22,38 @@ const EploreDetails = ({ view, add }) => {
     new Date().getMonth() + 1,
     15
   );
+  const data = useSelector((state) => state.persistedReducer.details)
+  const dispatch = useDispatch()
 
   return (
     <Container>
-      <StudioName>{view && view.title}</StudioName>
+      <StudioName>
+        {/* {view && view.title} */}
+        {data.title}
+      </StudioName>
       <StudioOwner> By: Kola Ayo Oshalusi</StudioOwner>
       <PageHolder>
         <ImageBoxHolder>
-          <MainImage src={view && view.pic} />
+          <MainImage src={data.pic} />
           <SubImageHolder>
-            <SubImage1 src={view && view.pic1} />
-            <SubImage1 src={view && view.pic2} />
-            <SubImage1 src={view && view.pic2} />
+            <SubImage1 src={data.pic1} />
+            <SubImage1 src={data.pic2} />
+            <SubImage1 src={data.pic2} />
           </SubImageHolder>
         </ImageBoxHolder>
         <ContentDesc>
           <DisplayResource>
             <ResourceTypeHolder>
               <ResourceTitle>Resource Type:</ResourceTitle>
-              <ResourceContent>{view && view.type}</ResourceContent>
+              <ResourceContent>{data.type}</ResourceContent>
             </ResourceTypeHolder>
             <ResourceTypeHolder>
               <ResourceTitle>Location:</ResourceTitle>
-              <ResourceContent>{view && view.location}</ResourceContent>
+              <ResourceContent>{data.location}</ResourceContent>
             </ResourceTypeHolder>
           </DisplayResource>
           <ResourcePrice>
-            <ResourceTitle>Price:  {view && view.price}</ResourceTitle>
+            <ResourceTitle>Price:  {data.price}</ResourceTitle>
 
             <ResourceContent>
               <span style={{ color: "white" }}>(Charged Hourly)</span>
@@ -55,7 +62,7 @@ const EploreDetails = ({ view, add }) => {
           <ResourceDetail>
             <ResourceTitle>Detailed Information::</ResourceTitle>
             <ResourceDescription>
-              {view && view.description}
+              {data.description}
             </ResourceDescription>
           </ResourceDetail>
           <StudioResouce>BOOK THIS RESOURCE</StudioResouce>
@@ -108,7 +115,8 @@ const EploreDetails = ({ view, add }) => {
               cursor: "pointer"
             }}
             onClick={() => {
-              add(view && view.id)
+              // add(view && view.id)\
+              dispatch(addTobook(data))
             }}
           >
             ADD TO CART
@@ -119,23 +127,23 @@ const EploreDetails = ({ view, add }) => {
   );
 };
 
-export const mapDispatch = dispatch => {
-  return {
-    add: (id) => {
-      dispatch(addToBook(id))
-    }
-  }
-}
+// export const mapDispatch = dispatch => {
+//   return {
+//     add: (id) => {
+//       dispatch(addToBook(id))
+//     }
+//   }
+// }
 
-export const singleBook = (state) => {
-  return {
-    view: state.shop.currentstate
-  }
-}
+// export const singleBook = (state) => {
+//   return {
+//     view: state.shop.currentstate
+//   }
+// }
 
 
 
-export default connect(singleBook, mapDispatch)(EploreDetails);
+export default EploreDetails;
 
 const BookingFormat = styled.div`
   font-size: 12px;

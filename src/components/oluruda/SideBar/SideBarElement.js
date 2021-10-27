@@ -9,7 +9,7 @@ export const SidebarContainer = styled.aside`
   z-index: 10;
   height: 100%;
   background: #0d0d0d;
-  align-items: center;
+ 
   display: grid;
   top: 0;
   left: 0;
@@ -35,8 +35,9 @@ export const Icon = styled.div`
 export const SidebarWrapper = styled.div`
   color: white;
   /* margin: auto; */
+  margin-top:70px;
 `;
-export const SidebarLink = styled(LinkS)`
+export const SidebarLink = styled(LinkR)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,3 +98,35 @@ export const SidebarMenu = styled.ul`
     grid-template-rows: repeat(6, 60px);
   }
 `;
+
+export const DropLinks = styled(LinkR)`
+
+
+`
+
+export const ShowCon = styled.div`
+display: flex;
+width: 150px;
+background-color: #6C757D;
+justify-content: space-around;
+border-radius: 5px;
+height: 40px;
+margin-top: 10px;
+align-items: center;
+`
+export const ShowCon1 = styled.div`
+
+
+
+`
+export const ShowCon2 = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+margin-top: 5px;
+
+`
+
+export const HoldConIcon = styled.div`
+display: flex;
+`

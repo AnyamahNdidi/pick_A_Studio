@@ -14,22 +14,20 @@ const Home1 = () => {
         <Bounce right>
           <ImgText>
             <StrongDiv>SAVE YOUR TIME AND ENERGY!</StrongDiv>
-            <span>
+            <p>
               As a professional photographer or videographer, one of your most
               tasking assignments is finding a suitable studio or location for
               your shoots. This is why we are here to save you from all that
               stress. Redirect your energy into more demanding areas. Leave this
               part, it's on us no hidden fees, no extra charges!
-            </span>
-            <br></br>
+            </p>
 
-            <span>
+            <p>
               Just browse through our listed studios, make a choice, and make a
               booking. We can also render you personalized on-demand services
               such as special equipment rentals, coffee for you and your team,
               or anything else in any studio location of your choice.
-            </span>
-            <br></br>
+            </p>
 
             <strong style={{ fontSize: "13px", color: "#fff" }}>
               WITH OVER 30 STUDIOS LISTED WORLD OVER, YOU CAN NEVER GO WRONG
@@ -84,25 +82,18 @@ const ImgSide = styled.img`
 // `;
 
 const ImgText = styled.div`
-  width: 600px;
+  max-width: 550px;
+  min-width: 300px;
   font-size: 16px;
   color: #9ca0a4;
   margin: 10px;
-  height: 350px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
- 
-  align-items: center;
-  
-  /* background-color: white; */
 
-  p {
+  /* p {
     width: 300px;
     text-align: center;
-  }
+  } */
 
-  @media screen and (max-width: 600px) {
+  /* @media screen and (max-width: 600px) {
     width: 310px;
-  }
+  } */
 `;

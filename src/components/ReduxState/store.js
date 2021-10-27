@@ -1,5 +1,17 @@
-import { createStore } from 'redux'
-import { reducer } from "./myReducer"
-import { composeWithDevTools } from "redux-devtools-extension"
+import { configureStore } from "@reduxjs/toolkit"
+import myReducer from "./actions"
+import { persistReducer } from "redux-persist"
+import storage from 'redux-persist/lib/storage'
 
-export const store = createStore(reducer, composeWithDevTools())
+
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+}
+const persistedReducer = persistReducer(persistConfig, myReducer)
+
+export const store = configureStore({
+  reducer: { persistedReducer }
+})

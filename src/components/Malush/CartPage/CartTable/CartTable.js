@@ -4,16 +4,20 @@ import HeaderContent from './HeaderContent'
 import MainData from './MainData'
 import RecentName from './RecentName'
 import { connect, useDispatch, useSelector } from "react-redux"
+import { viewDetails } from "../../../ReduxState/actions"
 
-function CartTable({ order }) {
+function CartTable() {
+  const data = useSelector((state) => state.persistedReducer.cartbookings);
+  const dispatch = useDispatch()
   return (
     <Container>
       <RecentName />
       <HeaderContent />
       <div>
         {
-          order.map((item) => (
-            <MainData r={item} key={item.id} />
+          data?.map((props) => (
+            <MainData r={props} key={props.id} />
+
           ))
         }
 
@@ -24,13 +28,13 @@ function CartTable({ order }) {
   )
 }
 
-const Mapbooklist = (state) => {
-  return {
-    order: state.shop.books
-  }
-}
+// const Mapbooklist = (state) => {
+//   return {
+//     order: state.shop.books
+//   }
+// }
 
-export default connect(Mapbooklist)(CartTable)
+export default CartTable
 const Container = styled.div`
 display: flex;
 flex-direction: column;

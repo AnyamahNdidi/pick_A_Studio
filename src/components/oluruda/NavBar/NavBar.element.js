@@ -2,6 +2,51 @@ import styled from "styled-components";
 import { Link as LinkR } from "react-router-dom";
 import { Link as LinkS } from "react-scroll";
 
+export const MobLinks = styled(LinkR)`
+
+`
+
+
+export const CartMobile = styled(LinkR)`
+  display: none;
+
+  @media screen and (max-width: 320px) {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    margin-top: -19px;
+    margin-right: 35px;
+
+    span{
+      font-size: 23px;
+     
+    }
+  }
+  @media screen and (max-width: 768px) {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: white;
+    margin-top: -19px;
+    margin-right: 30px;
+
+    span{
+      font-size: 24px;
+      top: 5;
+    }
+  }
+
+`
+
 export const SameLoDa = styled.div`
 display: flex;
 width: 200px;
@@ -91,7 +136,7 @@ export const NavbarContainer = styled.div`
   height: 80px;
   z-index: 99;
   width: 100%;
-  padding: 0 24px;
+  padding: 0 15px;
   max-width: 1100px;
   color: white;
  
@@ -103,7 +148,6 @@ export const NavLogo = styled(LinkR)`
   cursor: pointer;
   font-size: 1.5rem;
   display: flex;
-  margin-left: 24px;
   align-items: center;
   font-weight: bold;
   text-decoration: none;
@@ -125,6 +169,7 @@ export const MobileIcons = styled.div`
     font-size: 1.8rem;
     cursor: pointer;
     color: white;
+    margin-top: -15px;
   }
 `;
 
@@ -152,6 +197,12 @@ export const NavLinks = styled(LinkR)`
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
+  
+
+  span{
+   font-weight: 600;
+   margin-top: 3px;
+  }
 
   &.active {
     border-bottom: 3px solid #01bf71;

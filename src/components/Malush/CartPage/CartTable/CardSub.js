@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from "styled-components"
 import { Button } from "antd"
+import {useDispatch, useSelector} from "react-redux"
 
 function CardSub() {
+  const dataValue = useSelector((state) => state.persistedReducer.totalValuePrice)
   return (
     <AllContainer>
       <Container>
@@ -20,7 +22,7 @@ function CardSub() {
               </ConSub1>
 
               <ConSub2>
-                ₦14,000.00
+              ₦{Math.ceil(dataValue)}
               </ConSub2>
             </ConSub>
             <ConLine>
@@ -30,7 +32,7 @@ function CardSub() {
                 Shipping and handling
               </ConSub1>
               <ConSub2>
-                ₦00
+                ₦0
               </ConSub2>
 
             </ConSub>
@@ -43,7 +45,7 @@ function CardSub() {
               </ConSub1>
               <ConSub2>
                 <span>
-                  ₦14,000.00</span>
+                ₦{Math.ceil(dataValue)}</span>
               </ConSub2>
 
             </ConSub>
