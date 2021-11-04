@@ -129,7 +129,7 @@ const NavBar = ({ toggle }) => {
           </SameLoDa>
 
 
-          <CartMobile to="/explorlisting">
+          <CartMobile to="/cartpage">
           <ShoppingBasketIcon  />
           <span>{dfile.length}</span>
           </CartMobile>

@@ -1,15 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import Rent from "../Image/coooo.jpg";
+import {useHistory} from "react-router-dom"
 
 const Home4 = () => {
+  const hist= useHistory()
   return (
     <div>
       <Container>
         <ContainText>
           Do you have a standard equipment or studio you can rent out?
         </ContainText>
-        <Button>Apply to get listed</Button>
+        <Button
+        onClick={()=>{
+          hist.push("/dashoard")
+        }}
+        >Apply to get listed</Button>
         <SubText>Please check out our terms and condition</SubText>
       </Container>
     </div>

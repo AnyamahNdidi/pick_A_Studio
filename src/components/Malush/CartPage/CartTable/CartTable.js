@@ -11,8 +11,20 @@ function CartTable() {
   const dispatch = useDispatch()
   return (
     <Container>
-      <RecentName />
+
+      {
+        data <= 0 ? (<ItemNo>NO BOOKINGS FOUND</ItemNo>) :
+        
+        (
+          <div>
+             <RecentName />
       <HeaderContent />
+          </div>
+        )
+      }
+       
+
+     
       <div>
         {
           data?.map((props) => (
@@ -35,6 +47,19 @@ function CartTable() {
 // }
 
 export default CartTable
+
+const ItemNo = styled.div`
+color: white;
+width: 100%;
+justify-content:center;
+display: flex;
+align-items: center;
+height: 10o%;
+min-height: 100vh;
+flex: 1;
+font-size: 40px;
+`
+
 const Container = styled.div`
 display: flex;
 flex-direction: column;

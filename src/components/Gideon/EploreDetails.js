@@ -6,6 +6,8 @@ import pic2 from "./img/3.jpeg";
 import { connect } from "react-redux"
 import { allstudio, addTobook } from "../../components/ReduxState/actions"
 import { useSelector, useDispatch } from "react-redux"
+import SideBar from "../oluruda/SideBar/SideBar";
+import NavBar from "../oluruda/NavBar/"
 // import { addToBook } from "../ReduxState/actionState"
 
 import "./ExplorStyle.css";
@@ -25,7 +27,16 @@ const EploreDetails = () => {
   const data = useSelector((state) => state.persistedReducer.details)
   const dispatch = useDispatch()
 
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
+    <div>
+      <NavBar toggle={toggle} />
+       <SideBar isOpen={isOpen} toggle={toggle} />
     <Container>
       <StudioName>
         {/* {view && view.title} */}
@@ -124,6 +135,7 @@ const EploreDetails = () => {
         </ContentDesc>
       </PageHolder>
     </Container>
+    </div>
   );
 };
 

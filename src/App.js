@@ -13,24 +13,20 @@ import HomePeter from "./components/Peter/HomePeter"
 import { AppProvider } from "./components/GlobalAuth/GlobalAuth"
 import Load from './components/Malush/Reg/Load';
 import EploreDetails from './components/Gideon/EploreDetails';
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute"
 
 function App() {
-  const [isOpen, setIsOpen] = React.useState(false);
 
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
   return (
     <AppProvider>
       <Router>
-        <NavBar toggle={toggle} />
-        <SideBar isOpen={isOpen} toggle={toggle} />
+        
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/explorlisting" component={Explorlisting} />
           <Route exact path="/cartpage" component={Cartpage} />
           <Route exact path="/register" component={Reg} />
-          <Route exact path="/dashoard" component={HomePeter} />
+          <PrivateRoute exact path="/dashoard" component={HomePeter} />
           <Route exact path="/load" component={Load} />
           <Route exact path="/details/:id" component={EploreDetails} />
         </Switch>

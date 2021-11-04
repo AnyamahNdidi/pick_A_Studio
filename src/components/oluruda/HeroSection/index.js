@@ -2,9 +2,11 @@ import React from "react";
 import Cover from "../Image/cover.jpg";
 import styled from "styled-components";
 import Logo from "../Image/logo.png";
+import {useHistory} from "react-router-dom"
 // import "antd/dist/antd.css";
 
 const HeroSection = () => {
+  const hist = useHistory()
   return (
     <>
       <Main>
@@ -17,6 +19,9 @@ const HeroSection = () => {
           <Button
             type="primary"
             style={{ fontWeight: "bold", fontSize: "15px" }}
+            onClick={()=>{
+              hist.push("/register")
+            }}
           >
             Sign Up for Free
           </Button>

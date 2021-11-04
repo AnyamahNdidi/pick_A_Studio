@@ -8,9 +8,15 @@ import SideBar from "./SideBar/SideBar";
 import styled from "styled-components";
 
 function Home() {
-  
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div>
+      <NavBar toggle={toggle} />
+       <SideBar isOpen={isOpen} toggle={toggle} />
      <Container>
       <HeroSection />
       <ModalButton />
