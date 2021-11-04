@@ -29,6 +29,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    background: "red"
   },
   drawer: {
     [theme.breakpoints.up("sm")]: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      backgroundColor: "red"
     },
   },
   menuButton: {
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    
   },
 }));
 
@@ -81,6 +84,7 @@ function ResponsiveDrawer(props) {
           "My Invoice",
           "My Payments",
           "My Bookings",
+          
         ].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>

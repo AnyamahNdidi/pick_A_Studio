@@ -5,13 +5,31 @@ import HeaderContent from './CartTable/HeaderContent'
 import MobileCart from './CartTable/MobileCart'
 import CardSub from './CartTable/CardSub'
 import MobileAccept from './CartTable/MobileAccept'
+import NavBar from "../../oluruda/NavBar/"
+import SideBar from "../../oluruda/SideBar/SideBar"
+import { connect, useDispatch, useSelector } from "react-redux"
 
 function CartPage() {
+  const data = useSelector((state) => state.persistedReducer.cartbookings);
+  const dispatch = useDispatch()
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div>
+        <NavBar toggle={toggle} />
+       <SideBar isOpen={isOpen} toggle={toggle} />
+
       <AllContainer>
+        
         <Container>
-          <Con1>
+      { 
+      data <=0 ? <ItemNo> NO BOKINGS FOUND</ItemNo> : 
+      <>
+         <Con1>
             <CartTable />
             <MobileAccept />
 
@@ -20,8 +38,13 @@ function CartPage() {
           </ConSpace>
 
           <Con2>
-            <CardSub />
+            {
+              data <= 0 ? (<div></div>) : ( <CardSub />)
+            }
+           
           </Con2>
+      </>
+      }
         </Container>
       </AllContainer>
 
@@ -31,6 +54,18 @@ function CartPage() {
 }
 
 export default CartPage
+
+const ItemNo = styled.div`
+color: white;
+width: 100%;
+justify-content:center;
+display: flex;
+align-items: center;
+height: 10o%;
+min-height: 100vh;
+flex: 1;
+font-size: 40px;
+`
 
 const ConSpace = styled.div`
 width: 20px;

@@ -18,6 +18,8 @@ import moment from 'moment';
 import "./datasty.css"
 import { app } from "../../../base"
 import { Link, useHistory } from "react-router-dom";
+import NavBar from "../../oluruda/NavBar/"
+import SideBar from "../../oluruda/SideBar/SideBar"
 
 
 
@@ -33,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Register() {
-  const [toggle, setToggle] = useState(true)
+  const [istoggle, setisToggle] = useState(true)
   const [passTOg, setPassTog] = useState(false)
   const [DateofBirth, setDateofBirth] = useState("")
   const [firstname, setFirstname] = useState("")
@@ -52,8 +54,13 @@ function Register() {
     setPassTog(!passTOg)
   }
   const HangleToggle = () => {
-    setToggle(!toggle)
+    setisToggle(!istoggle)
   }
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
 
   const signInUser = async () => {
     const user = await app.auth().signInWithEmailAndPassword(email, password)
@@ -120,11 +127,12 @@ function Register() {
 
 
   return (
-
-
+    <div>
+    <NavBar toggle={toggle} />
+    <SideBar isOpen={isOpen} toggle={toggle} />
     <AllContainer>
       {
-        toggle ?
+        istoggle ?
           <div>
             <Container>
               <RegContainer>
@@ -257,7 +265,7 @@ function Register() {
                   <InputCon2>
 
                     <InputC2>
-                      <label>First Name</label>
+                      <label>Full Name</label>
                       <Input
                         style={{
                           height: "40px",
@@ -273,35 +281,8 @@ function Register() {
                         placeholder="First Name"
                         type="text"
                       />
-                      <label>Middle Name</label>
-                      <Input
-                        style={{
-                          height: "40px",
-                          margin: "5px",
-                          marginLeft: "0px"
-                        }}
-                        placeholder="Middle Name"
-                        type="text"
-                        value={middleName}
-                        onChange={(e) => {
-                          setMiddleName(e.target.value)
-                        }
-                        }
-                      />
-                      <label>SurName</label>
-                      <Input
-                        style={{
-                          height: "40px",
-                          margin: "5px",
-                          marginLeft: "0px"
-                        }}
-                        placeholder="Surname"
-                        type="text"
-                        value={surname}
-                        onChange={(e) => {
-                          setSurname(e.target.value)
-                        }}
-                      />
+                    
+
                       <label>Mobile Number</label>
                       <Input
                         style={{
@@ -424,12 +405,13 @@ function Register() {
                         </ButtonHolder2>
                       </ConFog>
                       <ConAcct
-                        onClick={HangleToggle}
+                       onClick={HangleToggle}
                       >
                         <AiOutlineUserAdd
                           style={{
                             marginTop: "5px"
                           }}
+                         
                         />
                         Sign In Instead
                       </ConAcct>
@@ -448,6 +430,7 @@ function Register() {
 
 
     </AllContainer >
+    </div>
   )
 }
 
@@ -620,9 +603,10 @@ display: flex;
 
 const ConTrans = styled.div`
 
-height: 950px;
+height: 700px;
  width: 650px;
- margin-top: 20px;
+ margin-top: 5px;
+ margin-bottom: 10px;
 
  border-radius: 5px;
  display: flex;

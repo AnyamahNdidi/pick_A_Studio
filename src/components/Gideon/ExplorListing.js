@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { app } from "../../base"
 import { allstudio, viewDetails } from "../../components/ReduxState/actions"
 import { Link } from "react-router-dom"
+import { NavBtn } from "../oluruda/NavBar/NavBar.element";
+import SideBar from "../oluruda/SideBar/SideBar";
+import NavBar from "../oluruda/NavBar/"
 const db = app.firestore().collection("studio")
 const ExplorListing = () => {
   const dfile = useSelector((state) => state.persistedReducer.allbookings)
@@ -39,6 +42,11 @@ const ExplorListing = () => {
 
 
   }
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
 
 
 
@@ -47,7 +55,11 @@ const ExplorListing = () => {
 
   }, [])
   return (
+    <div>
+       <NavBar toggle={toggle} />
+       <SideBar isOpen={isOpen} toggle={toggle} />
     <Container>
+      
       {
         dfile.map((item) => (
           <ExploreCard>
@@ -93,6 +105,7 @@ const ExplorListing = () => {
 
 
     </Container >
+    </div>
   );
 };
 

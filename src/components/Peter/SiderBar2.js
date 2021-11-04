@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { Button, Layout, Menu } from "antd";
+import {AiOutlineHome} from "react-icons/ai"
+import {BiUserCircle} from "react-icons/bi"
+
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -24,12 +27,18 @@ import { app } from "../../base";
 import PostProduct from "./PostProduct/PostProduct";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { FaGalacticSenate } from "react-icons/fa";
+import logoImg from "./logo.png"
+import {useHistory} from "react-router-dom"
+import { AppContext } from "../../components/GlobalAuth/GlobalAuth"
 
 const { Header, Sider, Content } = Layout;
 
+
 export const SiderBar2 = () => {
+  const { data } = useContext(AppContext)
   const [collapsed, setCollapsed] = useState(true);
   const [toggled, setToggled] = useState(false);
+  const hist = useHistory()
 
   const [dashboard, setDashboard] = useState(true);
   const [setting, setSetting] = useState(false);
@@ -114,7 +123,10 @@ export const SiderBar2 = () => {
   const onToggled = () => {
     setToggled(!toggled);
   };
-
+  const signOutUser = () => {
+    app.auth().signOut();
+    hist.push("/")
+  }
   return (
     <Layout>
       <Sider
@@ -126,11 +138,24 @@ export const SiderBar2 = () => {
           height: "100%",
           paddingTop: "60px",
           zIndex: "10",
+          background : "black"
         }}
       >
-        <div className="logo" />
+        <div className="logo" >
+          {/* <img src={logoImg} /> */}
+          </div>
 
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+        <Menu style = {{background : "black", color : "white"}} mode="inline" defaultSelectedKeys={["1"]}>
+
+        <Menu.Item
+            key="7"
+            icon={<AiOutlineHome style={{ fontSize: "25px" }} />}
+            onClick={()=>{
+              hist.push("/")
+            }}
+          >
+            Home
+          </Menu.Item>
           <Menu.Item
             key="1"
             icon={<DashboardOutlined style={{ fontSize: "25px" }} />}
@@ -173,6 +198,14 @@ export const SiderBar2 = () => {
           >
             Involve
           </Menu.Item>
+
+          <Menu.Item
+            key="9"
+            icon={<BiUserCircle style={{ fontSize: "25px" }} />}
+            onClick={onSetting}
+          >
+             {data && data.firstname}
+          </Menu.Item>
         </Menu>
       </Sider>
 
@@ -185,6 +218,7 @@ export const SiderBar2 = () => {
             fontSize: "30px",
             display: "flex",
             alignItems: "center",
+            background: "black"
           }}
         >
           <HeaderHolder>
@@ -208,7 +242,7 @@ export const SiderBar2 = () => {
             <MyButton danger onClick={onProduct}>
               Create Product
             </MyButton>
-            <MyButton type="primary" danger onClick={signOut}>
+            <MyButton type="primary" danger onClick={signOutUser}>
               <ExitToAppIcon />
             </MyButton>
           </MyContainer>
